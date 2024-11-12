@@ -1,0 +1,6 @@
+@Parking.Adapters.Driving.Api_HostAddress = http://localhost:5067
+
+GET {{Parking.Adapters.Driving.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
