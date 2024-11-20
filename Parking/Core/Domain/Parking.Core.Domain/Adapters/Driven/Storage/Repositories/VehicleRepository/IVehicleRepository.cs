@@ -4,7 +4,7 @@ namespace Parking.Core.Domain.Adapters.Driven.Storage.Repositories.VehicleReposi
 {
     public interface IVehicleRepository
     {
-        Task<Vehicle> GetByIdAsync(int id);
-        Task<Vehicle> AddAsync(Vehicle vehicle);
+        Task<RegisterVehicle> GetByIdAsync(int id);
+        Task<RegisterVehicle> AddAsync(RegisterVehicle vehicle);
     }
 }

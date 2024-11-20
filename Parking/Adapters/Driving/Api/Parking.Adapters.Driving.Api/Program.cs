@@ -1,7 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using FluentValidation;
 using Parking.Adapters.Driven.MongoDB;
 using Parking.Adapters.Driven.SQLServer;
-using Parking.Adapters.Driven.SQLServer.EF;
+using Parking.Adapters.Driving.Api.Dtos.Vehicle.Request;
+using Parking.Adapters.Driving.Api.Mapppings;
+using Parking.Core.Application;
+using Parking.Core.Domain.Adapters.Driving.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +14,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers();
+
 builder.Services.AddSqlServerDependencies(builder.Configuration);
 
 // Registrar dependências do MongoDB
 builder.Services.AddMongoDBDependencies(builder.Configuration);
 
+// Registrar dependências da aplicação
+builder.Services.AddApplicationDependencyModule(builder.Configuration);
+
+builder.Services.AddScoped<IValidator<CreateVehicleRequest>, CreateVehicleValidador>();
+
+//Configurações do AutoMapper
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddScoped<IMapperService, MapperService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,5 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();

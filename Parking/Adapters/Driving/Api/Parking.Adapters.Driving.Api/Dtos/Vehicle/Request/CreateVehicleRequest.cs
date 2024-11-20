@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Parking.Core.Domain.Entity
+﻿namespace Parking.Adapters.Driving.Api.Dtos.Vehicle.Request
 {
-    public class Vehicle
+    public class CreateVehicleRequest
     {
-        [Key]
-        public int Id { get; set; }
         public string Plate { get; set; }
         public string Model { get; set; }
         public string Brand { get; set; }
@@ -15,6 +11,5 @@ namespace Parking.Core.Domain.Entity
         public DateTime? ExitTime { get; set; }
         public string EmployerId { get; set; }
         public string VehicleType { get; set; }
-
     }
 }

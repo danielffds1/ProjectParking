@@ -19,13 +19,13 @@ namespace Parking.Adapters.Driven.SQLServer.Repositories.VehicleRepository
         }
 
         //Dapper implementation
-        public async Task<Vehicle> GetByIdAsync(int id)
+        public async Task<RegisterVehicle> GetByIdAsync(int id)
         {
             string sql = "SELECT * FROM Vehicles WHERE Id = @Id";
-            return await _dbConnection.QueryFirstOrDefaultAsync<Vehicle>(sql, new { Id = id });
+            return await _dbConnection.QueryFirstOrDefaultAsync<RegisterVehicle>(sql, new { Id = id });
         }
         //EF implementation
-        public async Task<Vehicle> AddAsync(Vehicle vehicle)
+        public async Task<RegisterVehicle> AddAsync(RegisterVehicle vehicle)
         {
             _dbContext.Vehicles.AddAsync(vehicle);
             await _dbContext.SaveChangesAsync();

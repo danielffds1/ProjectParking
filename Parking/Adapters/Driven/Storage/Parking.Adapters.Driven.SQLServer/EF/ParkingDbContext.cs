@@ -9,10 +9,10 @@ namespace Parking.Adapters.Driven.SQLServer.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Vehicle>()
+            modelBuilder.Entity<RegisterVehicle>()
                 .HasKey(v => v.Id);
 
         }
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<RegisterVehicle> Vehicles { get; set; }
     }
 }

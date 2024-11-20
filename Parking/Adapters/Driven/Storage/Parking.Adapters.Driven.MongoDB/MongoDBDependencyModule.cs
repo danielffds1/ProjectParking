@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
 using MongoDB.Driver;
 using Parking.Adapters.Driven.MongoDB.Contexts;
+using Parking.Adapters.Driven.MongoDB.GenericRepositoryMongo;
+using Parking.Core.Domain.Adapters.Driven.Storage.Repositories;
 
 namespace Parking.Adapters.Driven.MongoDB
 {
@@ -25,7 +26,15 @@ namespace Parking.Adapters.Driven.MongoDB
                 return new MongoDBContext(client, mongoDatabaseName);
             });
 
-            // Registrar repositórios aqui
+            // Registra o banco de dados como um serviço
+            services.AddScoped<IMongoDatabase>(provider =>
+            {
+                var context = provider.GetRequiredService<MongoDBContext>();
+                return context.Database;
+            });
+
+            // Registra os repositórios
+            services.AddScoped(typeof(IGenericRepositoryMongo<>), typeof(GenericRepositoryMongo<>));
         }
     }
 }

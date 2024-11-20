@@ -1,20 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Driver;
 
 namespace Parking.Adapters.Driven.MongoDB.Contexts
 {
     public class MongoDBContext
     {
-        private readonly IMongoDatabase _database;
+        public IMongoDatabase Database { get; }
 
         public MongoDBContext(IMongoClient client, string databaseName)
         {
-            _database = client.GetDatabase(databaseName);
+            Database = client.GetDatabase(databaseName);
         }
     }
 }
