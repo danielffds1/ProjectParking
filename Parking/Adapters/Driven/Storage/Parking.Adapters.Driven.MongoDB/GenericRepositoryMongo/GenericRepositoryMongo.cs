@@ -31,6 +31,11 @@ namespace Parking.Adapters.Driven.MongoDB.GenericRepositoryMongo
             var filter = Builders<T>.Filter.Eq("_id", id);
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
+        public async Task<T> GetByPlateAsync(string plate)
+        {
+            var filter = Builders<T>.Filter.Eq("Plate", plate);
+            return await _collection.Find(filter).FirstOrDefaultAsync();
+        }
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _collection.Find(_ => true).ToListAsync();

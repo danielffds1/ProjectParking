@@ -24,7 +24,12 @@ builder.Services.AddMongoDBDependencies(builder.Configuration);
 // Registrar dependências da aplicação
 builder.Services.AddApplicationDependencyModule(builder.Configuration);
 
+//Validadores do endpoint de veículos
 builder.Services.AddScoped<IValidator<CreateVehicleRequest>, CreateVehicleValidador>();
+builder.Services.AddScoped<IValidator<EntryVehicleRequest>, EntryVehicleValidador>();
+builder.Services.AddScoped<IValidator<ExitVehicleRequest>, ExitVehicleValidador>();
+
+
 
 //Configurações do AutoMapper
 var mappingConfig = new MapperConfiguration(mc =>
@@ -35,6 +40,7 @@ var mappingConfig = new MapperConfiguration(mc =>
 IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddScoped<IMapperService, MapperService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

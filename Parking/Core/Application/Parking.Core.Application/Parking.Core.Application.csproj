@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Adapters\Driven\Storage\Parking.Adapters.Driven.MongoDB\Parking.Adapters.Driven.MongoDB.csproj" />
     <ProjectReference Include="..\..\Domain\Parking.Core.Domain\Parking.Core.Domain.csproj" />
   </ItemGroup>
 

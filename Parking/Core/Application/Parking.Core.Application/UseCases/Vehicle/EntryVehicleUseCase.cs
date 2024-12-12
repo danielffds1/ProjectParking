@@ -9,14 +9,14 @@ using Parking.Core.Domain.Entity;
 
 namespace Parking.Core.Application.UseCases.Vehicle
 {
-    public class CreateVehicleUseCase : ICreateVehicleUseCase
+    public class EntryVehicleUseCase : IEntryVehicleUseCase
     {
-        private readonly ILogger<CreateVehicleUseCase> _logger;
-        private readonly IGenericRepositoryMongo<RegisterVehicleEntity> _vehicleRepository;
+        private readonly ILogger<EntryVehicleUseCase> _logger;
+        private readonly IGenericRepositoryMongo<EntryVehicleEntity> _vehicleRepository;
         private readonly IMapperService _mapperService;
-        public CreateVehicleUseCase(
-            ILogger<CreateVehicleUseCase> logger,
-            IGenericRepositoryMongo<RegisterVehicleEntity> vehicleRepository,
+        public EntryVehicleUseCase(
+            ILogger<EntryVehicleUseCase> logger,
+            IGenericRepositoryMongo<EntryVehicleEntity> vehicleRepository,
             IMapperService mapperService
          )
         {
@@ -24,30 +24,29 @@ namespace Parking.Core.Application.UseCases.Vehicle
             _vehicleRepository = vehicleRepository;
             _mapperService = mapperService;
         }
-        public async Task<CreateVehicleOutput> ExecuteAsync(CreateVehicleInput request, CancellationToken cancellationToken)
+        public async Task<EntryVehicleOutput> ExecuteAsync(EntryVehicleInput request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("CreateVehicleUseCase.ExecuteAsync");
 
             try
             {
-                var registerVehicle = new RegisterVehicle
+                var entryVehicle = new EntryVehicle
                 {
                     Plate = request.Plate,
                     Model = request.Model,
                     Brand = request.Brand,
-                    Color = request.Color,
                     Owner = request.Owner,
                     EntryTime = request.EntryTime,
                     EmployerId = request.EmployerId,
-                    VehicleType = request.VehicleType
+                    VehicleType = request.VehicleType,
+                    AllocatedParkingSpace = request.AllocatedParkingSpace
                 };
 
-                var registerVehicleDB = _mapperService.Map<RegisterVehicle, RegisterVehicleEntity>(registerVehicle);
+                var entryVehicleDB = _mapperService.Map<EntryVehicle, EntryVehicleEntity>(entryVehicle);
 
-                await _vehicleRepository.InsertAsync(registerVehicleDB);
+                await _vehicleRepository.InsertAsync(entryVehicleDB);
 
-
-                return new CreateVehicleOutput
+                return new EntryVehicleOutput
                 {
                     Message = "Veículo cadastrado com sucesso",
                     IsSuccess = true
@@ -58,7 +57,7 @@ namespace Parking.Core.Application.UseCases.Vehicle
                 _logger.LogError(ex, "CreateVehicleUseCase.ExecuteAsync");
             }
 
-            return new CreateVehicleOutput();
+            return new EntryVehicleOutput();
         }
     }
 }

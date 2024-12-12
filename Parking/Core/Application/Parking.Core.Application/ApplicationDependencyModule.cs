@@ -10,6 +10,8 @@ namespace Parking.Core.Application
         public static IServiceCollection AddApplicationDependencyModule(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ICreateVehicleUseCase, CreateVehicleUseCase>();
+            services.AddScoped<IEntryVehicleUseCase, EntryVehicleUseCase>();
+            services.AddScoped<IExitVehicleUseCase, ExitVehicleUseCase>();
             return services;
         }
 

@@ -6,6 +6,7 @@
         Task<T> UpdateAsync(string id, T entity);
         Task DeleteAsync(string id);
         Task<T> GetByIdAsync(string id);
+        Task<T> GetByPlateAsync(string plate);
         Task<IEnumerable<T>> GetAllAsync();
 
 
