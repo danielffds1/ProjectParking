@@ -19,7 +19,6 @@ namespace Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Outputs
             public string Color { get; set; }
             public string Owner { get; set; }
             public DateTime EntryTime { get; set; }
-            public DateTime? ExitTime { get; set; }
             public string EmployerId { get; set; }
             public string VehicleType { get; set; }
         }

@@ -1,10 +1,10 @@
-﻿using Parking.Core.Domain.Entity;
+﻿using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Inputs;
 
 namespace Parking.Core.Domain.Adapters.Driven.Storage.Repositories.VehicleRepository
 {
     public interface IVehicleRepository
     {
-        Task<RegisterVehicle> GetByIdAsync(int id);
-        Task<RegisterVehicle> AddAsync(RegisterVehicle vehicle);
+        Task<CreateVehicleInput> GetByIdAsync(int id);
+        Task<CreateVehicleInput> AddAsync(CreateVehicleInput vehicle);
     }
 }

@@ -34,6 +34,7 @@ namespace Parking.Adapters.Driving.Api.Controllers.Vehicle
             var validationInput = _validator.Validate(request);
 
             _logger.LogInformation("Saída do veículo do parking");
+
             if (!validationInput.IsValid)
             {
                 _logger.LogWarning("Dados inválidos para saída do veículo");

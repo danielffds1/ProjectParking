@@ -5,7 +5,6 @@ using Parking.Core.Domain.Adapters.Driving.Mappings;
 using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos;
 using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Inputs;
 using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Outputs;
-using Parking.Core.Domain.Entity;
 
 namespace Parking.Core.Application.UseCases.Vehicle
 {
@@ -30,22 +29,22 @@ namespace Parking.Core.Application.UseCases.Vehicle
 
             try
             {
-                var registerVehicle = new RegisterVehicle
-                {
-                    Plate = request.Plate,
-                    Model = request.Model,
-                    Brand = request.Brand,
-                    Color = request.Color,
-                    Owner = request.Owner,
-                    EntryTime = request.EntryTime,
-                    EmployerId = request.EmployerId,
-                    VehicleType = request.VehicleType
-                };
+                var existVehicle = await _vehicleRepository.GetByPlateAsync(request.Plate);
 
-                var registerVehicleDB = _mapperService.Map<RegisterVehicle, RegisterVehicleEntity>(registerVehicle);
+                if (existVehicle != null)
+                {
+                    return new CreateVehicleOutput
+                    {
+                        Message = "Veículo já cadastrado",
+                        IsSuccess = false,
+                        BusinessRuleViolation = true
+
+                    };
+                }
+
+                var registerVehicleDB = _mapperService.Map<CreateVehicleInput, RegisterVehicleEntity>(request);
 
                 await _vehicleRepository.InsertAsync(registerVehicleDB);
-
 
                 return new CreateVehicleOutput
                 {

@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Parking.Core.Domain.Adapters.Driven.Storage.Repositories;
 
 namespace Parking.Adapters.Driven.MongoDB.GenericRepositoryMongo
@@ -17,9 +18,15 @@ namespace Parking.Adapters.Driven.MongoDB.GenericRepositoryMongo
         }
         public async Task<T> UpdateAsync(string id, T entity)
         {
-            var filter = Builders<T>.Filter.Eq("_id", id);
-            await _collection.ReplaceOneAsync(filter, entity);
-            return entity;
+            var filter = Builders<T>.Filter.Eq("_id", new ObjectId(id));
+            var updateResult = await _collection.ReplaceOneAsync(filter, entity);
+
+            if (updateResult.IsAcknowledged && updateResult.ModifiedCount > 0)
+            {
+                return entity;
+            }
+
+            return null;
         }
         public async Task DeleteAsync(string id)
         {
@@ -34,6 +41,7 @@ namespace Parking.Adapters.Driven.MongoDB.GenericRepositoryMongo
         public async Task<T> GetByPlateAsync(string plate)
         {
             var filter = Builders<T>.Filter.Eq("Plate", plate);
+
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<T>> GetAllAsync()

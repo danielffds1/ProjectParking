@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Parking.Core.Domain.Entity;
+using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Inputs;
 
 namespace Parking.Adapters.Driven.SQLServer.EF
 {
@@ -11,6 +11,6 @@ namespace Parking.Adapters.Driven.SQLServer.EF
         {
 
         }
-        public DbSet<RegisterVehicle> Vehicles { get; set; }
+        public DbSet<CreateVehicleInput> Vehicles { get; set; }
     }
 }

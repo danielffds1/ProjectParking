@@ -34,6 +34,7 @@ namespace Parking.Adapters.Driving.Api.Controllers.Vehicle
             var validationInput = _validator.Validate(request);
 
             _logger.LogInformation("Iniciando a criação do veículo");
+
             if (!validationInput.IsValid)
             {
                 _logger.LogWarning("Dados inválidos no pedido de criação de veículo");

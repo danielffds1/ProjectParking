@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Adapters\Driving\Api\" />
     <Folder Include="Dtos\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>

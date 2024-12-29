@@ -32,8 +32,8 @@ namespace Parking.Adapters.Driving.Api.Mapppings
 
             RuleFor(x => x.VehicleType)
                 .NotEmpty().WithMessage("O tipo de veículo é obrigatório.")
-                .Must(vt => vt == "Carro" || vt == "Moto" || vt == "Caminhão" || vt == "Outro")
-                .WithMessage("O tipo de veículo deve ser 'Carro', 'Moto', 'Caminhão' ou 'Outro'.");
+                .Must(vt => vt == "Carro" || vt == "Moto" || vt == "Caminhao" || vt == "Outro")
+                .WithMessage("O tipo de veículo deve ser 'Carro', 'Moto', 'Caminhao' ou 'Outro'.");
 
             RuleFor(x => x.AllocatedParkingSpace)
                 .NotEmpty().WithMessage("A vaga alocada é obrigatória.")

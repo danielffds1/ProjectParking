@@ -3,6 +3,6 @@
     public class CreateVehicleRequest : VehicleRequestBase
     {
         public string Color { get; set; }
-        public DateTime? Create { get; set; }
+        public DateTime? DateOfCreation { get; set; }
     }
 }

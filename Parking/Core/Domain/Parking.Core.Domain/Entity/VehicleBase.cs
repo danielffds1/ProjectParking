@@ -1,4 +1,6 @@
-﻿namespace Parking.Core.Domain.Entity
+﻿using Parking.Core.Domain.Enums;
+
+namespace Parking.Core.Domain.Entity
 {
     public class VehicleBase
     {
@@ -7,8 +9,8 @@
         public string Model { get; set; }
         public string Brand { get; set; }
         public string Owner { get; set; }
-        public DateTime EntryTime { get; set; }
         public string EmployerId { get; set; }
         public string VehicleType { get; set; }
+        public VehicleStatus Status { get; set; }
     }
 }

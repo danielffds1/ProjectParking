@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
 using Parking.Adapters.Driven.SQLServer.EF;
 using Parking.Core.Domain.Adapters.Driven.Storage.Repositories.VehicleRepository;
-using Parking.Core.Domain.Entity;
+using Parking.Core.Domain.Application.UseCase.Vehicle.Dtos.Inputs;
 using System.Data;
-using Dapper;
 
 namespace Parking.Adapters.Driven.SQLServer.Repositories.VehicleRepository
 {
@@ -19,13 +18,13 @@ namespace Parking.Adapters.Driven.SQLServer.Repositories.VehicleRepository
         }
 
         //Dapper implementation
-        public async Task<RegisterVehicle> GetByIdAsync(int id)
+        public async Task<CreateVehicleInput> GetByIdAsync(int id)
         {
             string sql = "SELECT * FROM Vehicles WHERE Id = @Id";
-            return await _dbConnection.QueryFirstOrDefaultAsync<RegisterVehicle>(sql, new { Id = id });
+            return await _dbConnection.QueryFirstOrDefaultAsync<CreateVehicleInput>(sql, new { Id = id });
         }
         //EF implementation
-        public async Task<RegisterVehicle> AddAsync(RegisterVehicle vehicle)
+        public async Task<CreateVehicleInput> AddAsync(CreateVehicleInput vehicle)
         {
             _dbContext.Vehicles.AddAsync(vehicle);
             await _dbContext.SaveChangesAsync();
