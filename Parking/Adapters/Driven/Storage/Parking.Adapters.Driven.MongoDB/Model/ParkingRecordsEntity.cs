@@ -7,7 +7,8 @@ namespace Parking.Adapters.Driven.MongoDB.Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
+        public string Id { get; set; }
+        public string Color { get; set; }
         public string AllocatedParkingSpace { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime ExitTime { get; set; }

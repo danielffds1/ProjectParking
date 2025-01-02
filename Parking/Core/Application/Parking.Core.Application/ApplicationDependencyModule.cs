@@ -12,6 +12,8 @@ namespace Parking.Core.Application
             services.AddScoped<ICreateVehicleUseCase, CreateVehicleUseCase>();
             services.AddScoped<IEntryVehicleUseCase, EntryVehicleUseCase>();
             services.AddScoped<IExitVehicleUseCase, ExitVehicleUseCase>();
+            services.AddScoped<IListVehicleUseCase, ListVehiclesUseCase>();
+
             return services;
         }
 
